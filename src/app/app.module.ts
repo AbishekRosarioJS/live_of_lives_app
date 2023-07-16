@@ -17,6 +17,13 @@ import { CommentListComponent } from './comments/comment-list/comment-list.compo
 import { PostCardComponent } from './layouts/post-card/post-card.component';
 import { AboutusComponent } from './pages/aboutus/aboutus.component';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from 'src/environments/environment.development';
+
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +43,9 @@ import { AboutusComponent } from './pages/aboutus/aboutus.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
