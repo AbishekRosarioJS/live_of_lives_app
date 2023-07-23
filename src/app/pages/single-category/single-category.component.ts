@@ -8,19 +8,25 @@ import { PostsService } from 'src/app/Services/posts.service';
   styleUrls: ['./single-category.component.css']
 })
 export class SingleCategoryComponent  implements OnInit{
-  postsArray:any;
+  postsArray: Array<object> = [];
 
-  constructor( private route :ActivatedRoute , private postService:PostsService) {}
+  categoryObj:any
+
+  constructor( private route :ActivatedRoute,private postService: PostsService) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(val => {
       console.log(val);
-     this.postService.loadCategoryPosts(val['id']).subscribe(post => {
-      this.postsArray = post;
-     })
-      })
-      
-  
-  }
+      this.categoryObj = val;
 
+      this.postService.loadCategoryPosts(val['id']).subscribe(post => {
+        this.postsArray = post;
+      });
+    });
+
+
+    console.log("PostArray",this.postsArray)
+  }
 }
+
+

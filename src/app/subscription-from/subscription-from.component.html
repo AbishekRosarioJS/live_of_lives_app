@@ -4,16 +4,57 @@
             <h3>SUBSCRIBTION FORM</h3>
             <P class="m-auto sub-text"> To divide the featured views horizontally with a ratio of 1000:23 using Bootstrap, you can use the grid system classes provided by Bootstrap</P>
 
-            <form action="" class="row form-inline mb-5">
+           <div class="alert alert-danger mt-3" *ngIf="isEmailError">
+            Email is Already in Ues
+           </div>
+
+           
+           <div class="alert alert-info mt-3" *ngIf="isSubscribed">
+            Thank you for subscribing to our newsletter service. stay tuned for Awesome blog posts..!
+           </div>
+
+            <form class="row form-inline mb-5" #SubForm="ngForm" (ngSubmit)="onSubmit(SubForm.value)" *ngIf="!isSubscribed">
                 <div class="form-group col-md-5">
-                    <input type="text" class="form-control shadow-effect" placeholder="Your Name">
+                    <input 
+                    type="text"
+                     class="form-control"
+                      placeholder="Your Name"
+                      name="name"
+                      #Name="ngModel"
+                      ngModel
+                      required
+                      [ngClass]="{'is-invalid':Name.touched && Name.invalid}">
+
+                      <div class="text-danger" *ngIf="Name.touched && Name.invalid">
+                        <div *ngIf="Name.errors?.['required']">
+                          Name is Required
+                        </div>
+                      </div>
+                      
                 </div>
                 <div class="form-group col-md-5">
-                    <input type="email" class="form-control shadow-effect" placeholder="Email Address">
+                    <input 
+                    type="email" 
+                    class="form-control" 
+                    placeholder="Email Address"
+                    name="email"
+                    ngModel
+                    required
+                    #Email="ngModel"
+                    email
+                    [ngClass]="{'is-invalid':Email.touched && Email.invalid}">
+                    <div class="text-danger" *ngIf="Email.touched && Email.invalid">
+                        <div *ngIf="Email.errors?.['required']">
+                          Email is Required
+                        </div>
+                        <div *ngIf="Email.errors?.['email']">
+                            Please Enter a vaild Email Address
+                          </div>
+                      </div>
                 </div>
 
                 <div class="col-md-2">
-                    <button class="btn btn-info btn-block ">SUBSCRIBE</button>
+                    <button class="btn btn-info btn-block" [disabled]="SubForm.invalid">SUBSCRIBE</button>
                 </div>
             </form>
         </div>

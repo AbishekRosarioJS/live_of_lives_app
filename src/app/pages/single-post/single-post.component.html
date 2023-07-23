@@ -3,26 +3,24 @@
         <div class="col-md-9">
 
             <div class="card shadow-effect">
-                <img src="https://images.pexels.com/photos/244206/pexels-photo-244206.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="" class="card-img-top img-fluid">
+                <img src="{{postData.postImgPath}}" alt="" class="card-img-top img-fluid">
                 <div class="card-body">
-                    <small class="bg-light text-danger text-center">Design</small>
+                    <small class="bg-light text-danger text-center">{{postData.category.category}}</small>
                     <small class="bg-light text-success text-center ml-2">Featured</small>
-                    <small class="bg-light text-info text-center ml-2">Views -10323,232</small>
-                    <small class="bg-light text-warning text-center ml-2">LAST UPDATED -SEP 20,2021</small>
+                    <small class="bg-light text-info text-center ml-2">Views - {{postData.views}}</small>
+                    <small class="bg-light text-warning text-center ml-2">LAST UPDATED - {{postData.createdAt.toMillis() | date}}</small>
 
-                    <h1 class="mt-3 mb-3">Apple became the first publicly traded U.S. company to be valued at over $1 trillion in August 2018, then at $2 trillion in August 2020,</h1>
-                    <p>a design that set the current shape for almost all modern laptops. The same year, Apple introduced System 7, a major upgrade to the Macintosh operating system, adding color to the interface and introducing new networking capabilities.
-                     The success of the lower-cost Macs and PowerBook brought increasing revenue.[58] For some time, Apple was doing incredibly well, introducing fresh new products and generating increasing profits in the process. The magazine MacAddict named the period between 1989 and 1991 as the "first golden age" of the Macintosh</p>
+                    <h1 class="mt-3 mb-3">{{postData.title}}</h1>
+                    <p [innerHTML]="postData.content"></p>
                 </div>
             </div>
             <app-comment-from></app-comment-from>
             <app-comment-list></app-comment-list>
         </div>
         <div class="col-md-3">
-        <app-post-card></app-post-card>
-        <app-post-card></app-post-card>
-        <app-post-card></app-post-card>
-        <app-post-card></app-post-card>
+          <div *ngFor="let similarpost of similarPostArray">
+            <app-post-card [postData]='similarpost'></app-post-card>
+          </div>
         </div>
     </div>
 </div>
